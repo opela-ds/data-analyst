@@ -1,0 +1,21 @@
+Your previous code:
+
+```python
+{previous_code}
+```
+Output from running the code:
+```python
+{output}
+```
+
+CSV {csv_status}, and here is its content preview:
+
+{csv_preview}
+
+Please revise the code so it correctly scrapes, cleans, and saves the data to `scraped_data.csv`.
+
+Make sure:
+- All attributes have consistent and correct datatypes (e.g., float, int, string, datetime).
+- No invalid strings or malformed entries are present in any column.
+- Columns used for downstream analysis or logic are properly parsed and cleaned.
+- Save structured data only — drop unrelated sections like footnotes or metadata.

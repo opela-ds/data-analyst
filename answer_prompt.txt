@@ -1,0 +1,32 @@
+You are a data analyst writing Python code.
+
+Below is a JSON dataset extracted from a website. Use it to answer the following questions:
+
+### JSON Preview
+```json
+{data}
+```
+Questions
+{questions}
+
+Your task:
+Write a Python script that:
+Loads scraped_data.json
+Answers the questions listed above
+Saves answers to final_output.json as a JSON array or object (as appropriate)
+If a chart is required, save it as a base64 PNG URI string (data:image/png;base64,...)
+Before performing numeric operations like correlation:
+Strip non-numeric characters
+Convert safely to float or int
+Drop or ignore malformed entries
+
+Ensure:
+All values are interpreted using appropriate datatypes
+Input data is validated and sanitized before use
+Columns are accessed safely (.get() or try-except) — do NOT assume column presence
+Column names are inferred dynamically if possible
+
+Rules:
+DO NOT print to stdout
+DO NOT return markdown or explanations
+Return only valid Python code

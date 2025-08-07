@@ -1,0 +1,12 @@
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore environment files
+.env
+
+# Ignore Gemini output files if needed
+output_code.py
+output_answer.json
+scraped_data.csv
+scraped_data.json
