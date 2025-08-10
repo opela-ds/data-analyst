@@ -8,14 +8,38 @@ Output from running the code:
 {output}
 ```
 
-CSV {csv_status}, and here is its content preview:
+
+CSV {csv_status}. Content preview (first 5 rows):
 
 {csv_preview}
 
-Please revise the code so it correctly scrapes, cleans, and saves the data to `scraped_data.csv`.
+Validation Errors:
+{errors}
 
-Make sure:
-- All attributes have consistent and correct datatypes (e.g., float, int, string, datetime).
-- No invalid strings or malformed entries are present in any column.
-- Columns used for downstream analysis or logic are properly parsed and cleaned.
-- Save structured data only — drop unrelated sections like footnotes or metadata.
+---
+
+**Analysis and Guidance for Next Attempt:**
+
+**The generated scraper code did not produce a valid, analysis-ready dataset.** Inspect the CSV preview and errors above to diagnose the possible reason(s). The most common causes include:
+
+- No suitable table or structured data found on the page.
+- Incorrect table detected (headers or columns do not match the data described in the question).
+- Table parsing or row extraction logic is too brittle (e.g., fails with merged headers, missing cells, extra columns).
+- Data cleaning or type conversion errors (e.g., columns became all null/zero/1970-01-01, or text fields disappeared).
+- Output is missing, empty, or contains uninformative/default values in key columns.
+
+**When revising your code:**
+
+- Dynamically scan ALL tables or candidate structures on the page. For each, check for relevance by matching against key columns or header keywords described in the task (using synonyms as needed).
+- Do NOT hardcode any assumptions about table indexes, CSS classes, or required columns.
+- If no relevant table is found, handle the failure gracefully (print a clear message, do not crash or output empty files).
+- Clean and normalize all data:
+    - Convert to appropriate types (numeric, date, string).
+    - Remove extraneous information (units, footnotes, references, blanks).
+    - Ensure all outputted tables have at least 5 meaningful rows.
+- Save only valid, non-empty CSV(s) with consistent, clean headers.
+
+**You must output only valid, self-contained Python code that completes the described task—do not answer the question directly.**
+
+Focus on _generalizing_ your code so it adapts to ANY relevant web page structure, not just the specific example previously provided.
+

@@ -3,6 +3,7 @@ The Python script you previously generated failed during execution.
 ## Your Previous Code
 ```python
 {code}
+```
 Error Encountered
 {status}
 
@@ -11,20 +12,17 @@ Output File
 
 Please revise the code to ensure:
 
-It reads from scraped_data.json
+- It reads from scraped_data.json
+- It correctly answers the questions provided
+- It writes the results to final_output.json
+- It avoids any runtime errors
+- It handles all data types appropriately from the JSON
+- Values are converted to expected types (float, int, str, etc.) before processing
+- It gracefully handles missing fields or inconsistent types using try-except or .get()
+- If any unexpected error occurs during execution, do NOT suppress it silently
+- Raise exceptions so the script exits with an error code
+- Ensure final_output.json is created only if the answers are successfully computed
 
-It correctly answers the questions provided
-
-It writes the results to final_output.json
-
-It avoids any runtime errors
-
-It handles all data types appropriately from the JSON
-
-Values are converted to expected types (float, int, str, etc.) before processing
-
-It gracefully handles missing fields or inconsistent types using try-except or .get()
-
-Important:
-Only return valid updated Python code.
+Important:  
+Only return valid updated Python code.  
 Do NOT include explanations, print statements, or markdown.
