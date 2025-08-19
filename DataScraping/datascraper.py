@@ -11,6 +11,42 @@ PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, ".."))
 
 CSV_PATH = os.path.join(PROJECT_ROOT, "scraped_data.csv")
 
+import os
+
+def save_uploaded_question(uploaded_file, scraped_json_path="scraped_data.json", prefix="question"):
+    """
+    Save the uploaded question file into the same directory where scraped_data.json is located.
+    Creates sequentially numbered question files (question1.txt, question2.txt, ...).
+    """
+    folder = os.path.dirname(scraped_json_path)
+    if not folder:
+        folder = "."  # current directory
+    
+    os.makedirs(folder, exist_ok=True)
+
+    existing = [
+        f for f in os.listdir(folder)
+        if f.startswith(prefix) and f.endswith(".txt")
+    ]
+    numbers = []
+    for f in existing:
+        try:
+            num = int(f[len(prefix):-4])
+            numbers.append(num)
+        except ValueError:
+            continue
+
+    next_num = max(numbers) + 1 if numbers else 1
+    filename = f"{prefix}{next_num}.txt"
+    filepath = os.path.join(folder, filename)
+
+    with open(filepath, "wb") as f:
+        f.write(uploaded_file.file.read())
+
+    print(f"[save_uploaded_question] Saved: {filepath}")
+    return filepath
+
+
 def debug_generated_code(scraper_path):
     """Debug the generated scraper code to identify common issues"""
     print("[debug] Analyzing generated scraper code...")

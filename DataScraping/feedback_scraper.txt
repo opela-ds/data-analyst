@@ -18,28 +18,21 @@ Validation Errors:
 
 ---
 
-**Analysis and Guidance for Next Attempt:**
+**Diagnosis:**
+- The scraped data does not meet quality criteria: at least 3 relevant columns and 5 meaningful rows.
+- Possible reasons:
+  1. Wrong table selected (missing important columns like Title or Year).
+  2. Column names don't match exactly, and fuzzy matching wasn't implemented.
+  3. Table had merged/misaligned headers not properly split.
+  4. All/most data in numeric columns are actually years, indicating column misalignment.
+  5. Ensure that the code does not have any backticks "python".
+  
+**Required in the next attempt:**
+- Implement fuzzy column detection (e.g., find any column containing 'gross' or 'rank' or 'title', regardless of exact spelling).
+- If no single table matches all desired columns, choose the table with most relevant matches and rows.
+- Print debug info: number of tables found and their columns before choosing.
+- Avoid strict filters like requiring every column — this caused valid tables to be skipped.
+- Clean headers and data to avoid year values appearing in gross columns.
+- Save only when table passes checks: >=3 relevant columns, >=5 meaningful data rows.
 
-**The generated scraper code did not produce a valid, analysis-ready dataset.** Inspect the CSV preview and errors above to diagnose the possible reason(s). The most common causes include:
-
-- No suitable table or structured data found on the page.
-- Incorrect table detected (headers or columns do not match the data described in the question).
-- Table parsing or row extraction logic is too brittle (e.g., fails with merged headers, missing cells, extra columns).
-- Data cleaning or type conversion errors (e.g., columns became all null/zero/1970-01-01, or text fields disappeared).
-- Output is missing, empty, or contains uninformative/default values in key columns.
-
-**When revising your code:**
-
-- Dynamically scan ALL tables or candidate structures on the page. For each, check for relevance by matching against key columns or header keywords described in the task (using synonyms as needed).
-- Do NOT hardcode any assumptions about table indexes, CSS classes, or required columns.
-- If no relevant table is found, handle the failure gracefully (print a clear message, do not crash or output empty files).
-- Clean and normalize all data:
-    - Convert to appropriate types (numeric, date, string).
-    - Remove extraneous information (units, footnotes, references, blanks).
-    - Ensure all outputted tables have at least 5 meaningful rows.
-- Save only valid, non-empty CSV(s) with consistent, clean headers.
-
-**You must output only valid, self-contained Python code that completes the described task—do not answer the question directly.**
-
-Focus on _generalizing_ your code so it adapts to ANY relevant web page structure, not just the specific example previously provided.
-
+You must produce a single, self-contained Python script that passes these checks.

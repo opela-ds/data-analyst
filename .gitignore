@@ -3,6 +3,7 @@ __pycache__/
 
 .env
 
+final_output.json
 output_code.py
 output_answer.json
 scraped_data.csv
